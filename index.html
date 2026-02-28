@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investing Mental Models - Decision Frameworks for Smart Investing</title>
+    <meta name="description" content="Essential mental models for investing decisions. Margin of safety, circle of competence, Mr. Market, and more frameworks from legendary investors.">
+    <style>
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #6d28d9;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --bg: #faf5ff;
+            --card-bg: #ffffff;
+            --text: #1e1b4b;
+            --text-light: #6b7280;
+            --border: #e5e0f0;
+            --success: #10b981;
+            --gold: #d97706;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 35%, #7c3aed 70%, #a78bfa 100%);
+            color: white; padding: 80px 20px; text-align: center; position: relative;
+        }
+        .hero::after {
+            content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 80px;
+            background: var(--bg);
+            clip-path: polygon(0 60%, 100% 0%, 100% 100%, 0% 100%);
+        }
+        .hero h1 { font-size: 3em; margin-bottom: 16px; font-weight: 800; position: relative; z-index: 1; }
+        .hero p { font-size: 1.2em; opacity: 0.9; max-width: 700px; margin: 0 auto 30px; position: relative; z-index: 1; }
+        .badge { display: inline-block; background: rgba(255,255,255,0.15); padding: 6px 18px; border-radius: 50px; font-size: 0.85em; margin-bottom: 20px; position: relative; z-index: 1; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        nav { background: white; padding: 14px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+        .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .nav-brand { font-weight: 700; font-size: 1.2em; color: var(--primary); text-decoration: none; }
+        .nav-links { display: flex; gap: 20px; flex-wrap: wrap; }
+        .nav-links a { color: var(--text-light); text-decoration: none; font-size: 0.95em; }
+        .nav-links a:hover { color: var(--primary); }
+        .section { padding: 60px 0; }
+        .section-title { font-size: 2em; text-align: center; margin-bottom: 12px; }
+        .section-sub { text-align: center; color: var(--text-light); max-width: 650px; margin: 0 auto 40px; font-size: 1.1em; }
+        .divider { width: 60px; height: 4px; background: var(--primary); border-radius: 2px; margin: 0 auto 30px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; }
+        @media (max-width: 768px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } .hero h1 { font-size: 2em; } }
+        .card {
+            background: var(--card-bg); border-radius: 16px; padding: 32px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04); border: 1px solid var(--border);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 12px 24px rgba(124,58,237,0.1); }
+        .card-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.8em; margin-bottom: 14px; }
+        .icon-purple { background: #ede9fe; }
+        .icon-blue { background: #dbeafe; }
+        .icon-amber { background: #fef3c7; }
+        .icon-green { background: #d1fae5; }
+        .icon-red { background: #fee2e2; }
+        .icon-teal { background: #ccfbf1; }
+        .card h3 { font-size: 1.25em; margin-bottom: 8px; }
+        .card p { color: var(--text-light); margin-bottom: 10px; }
+        .quote-box {
+            background: linear-gradient(135deg, #faf5ff, #ede9fe);
+            border-left: 4px solid var(--primary);
+            padding: 20px; border-radius: 0 12px 12px 0; margin: 16px 0;
+            font-style: italic; color: var(--text);
+        }
+        .quote-box .author { font-style: normal; font-weight: 600; color: var(--primary); margin-top: 8px; display: block; }
+        .example-box {
+            background: #f8fafc; border-left: 4px solid var(--secondary);
+            padding: 14px; border-radius: 0 8px 8px 0; margin: 12px 0; font-size: 0.95em;
+        }
+        .example-box strong { color: var(--secondary); display: block; margin-bottom: 4px; }
+        .warning-box { background: #fffbeb; border: 1px solid #fcd34d; border-radius: 12px; padding: 18px; margin: 14px 0; }
+        .warning-box strong { color: #d97706; }
+        .master-card {
+            background: linear-gradient(135deg, #1e1b4b, #4c1d95);
+            border-radius: 16px; padding: 32px; color: white;
+        }
+        .master-card h3 { color: #c4b5fd; margin-bottom: 8px; }
+        .master-card p { color: #a5b4fc; }
+        .principle-list { list-style: none; margin: 16px 0; }
+        .principle-list li {
+            padding: 12px 0 12px 36px; position: relative; border-bottom: 1px solid var(--border);
+        }
+        .principle-list li:last-child { border-bottom: none; }
+        .principle-list li::before {
+            content: ''; position: absolute; left: 0; top: 18px;
+            width: 20px; height: 20px; border-radius: 50%; background: var(--primary);
+            opacity: 0.15;
+        }
+        .principle-list li::after {
+            content: '✓'; position: absolute; left: 4px; top: 14px;
+            color: var(--primary); font-weight: 700; font-size: 0.85em;
+        }
+        .tag { display: inline-block; padding: 4px 12px; border-radius: 50px; font-size: 0.78em; font-weight: 600; }
+        .tag-value { background: #ede9fe; color: #7c3aed; }
+        .tag-risk { background: #fee2e2; color: #dc2626; }
+        .tag-behavior { background: #fef3c7; color: #d97706; }
+        .tag-growth { background: #d1fae5; color: #059669; }
+        table {
+            width: 100%; border-collapse: separate; border-spacing: 0;
+            border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        th { background: var(--primary); color: white; padding: 14px 16px; text-align: left; }
+        td { padding: 12px 16px; border-bottom: 1px solid var(--border); background: white; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #faf5ff; }
+        .btn { display: inline-block; padding: 14px 30px; border-radius: 10px; text-decoration: none; font-weight: 600; font-size: 1em; transition: all 0.2s; }
+        .btn-white { background: white; color: var(--primary); }
+        .btn-white:hover { background: #faf5ff; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .cta-section {
+            background: linear-gradient(135deg, #1e1b4b, #4c1d95, #7c3aed);
+            color: white; padding: 80px 20px; text-align: center;
+            border-radius: 24px; margin: 40px auto; max-width: 1200px;
+        }
+        .cta-section h2 { font-size: 2.2em; margin-bottom: 14px; }
+        .cta-section p { font-size: 1.1em; opacity: 0.9; max-width: 600px; margin: 0 auto 28px; }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 30px; }
+        .resource-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.2s; }
+        .resource-card:hover { border-color: var(--primary); }
+        .resource-card a { color: var(--primary); text-decoration: none; font-weight: 600; }
+        .resource-card p { color: var(--text-light); font-size: 0.85em; margin-top: 6px; }
+        .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 40px 0; }
+        @media (max-width: 768px) { .stat-grid { grid-template-columns: repeat(2, 1fr); } }
+        .stat-card { text-align: center; padding: 24px; background: white; border-radius: 12px; border: 1px solid var(--border); }
+        .stat-number { font-size: 2.2em; font-weight: 800; color: var(--primary); }
+        .stat-label { color: var(--text-light); font-size: 0.88em; margin-top: 4px; }
+        footer { background: #1e1b4b; color: #a5b4fc; padding: 60px 20px 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto 40px; }
+        .footer-col h4 { color: white; margin-bottom: 14px; }
+        .footer-col a { display: block; color: #a5b4fc; text-decoration: none; padding: 4px 0; }
+        .footer-col a:hover { color: white; }
+        .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 20px; border-top: 1px solid #312e81; text-align: center; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-inner">
+            <a href="https://keeprule.com" class="nav-brand">KeepRule</a>
+            <div class="nav-links">
+                <a href="https://keeprule.com/en/scenarios">Scenarios</a>
+                <a href="https://keeprule.com/en/principles">Principles</a>
+                <a href="https://keeprule.com/en/masters">Masters</a>
+                <a href="https://keeprule.com/en/blog">Blog</a>
+                <a href="https://keeprule.com/en/faq">FAQ</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="badge">Investing Wisdom Library</div>
+        <h1>Investing Mental Models</h1>
+        <p>The essential mental models used by legendary investors like Warren Buffett, Charlie Munger, and Benjamin Graham. Think in frameworks, invest with conviction.</p>
+        <a href="https://keeprule.com/en/masters" class="btn btn-white" style="position:relative;z-index:1">Explore Expert Masters</a>
+    </section>
+
+    <div class="container">
+        <section class="section">
+            <div class="stat-grid">
+                <div class="stat-card"><div class="stat-number">12</div><div class="stat-label">Core Mental Models</div></div>
+                <div class="stat-card"><div class="stat-number">50+</div><div class="stat-label">Years of Proven Results</div></div>
+                <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">Investment Categories</div></div>
+                <div class="stat-card"><div class="stat-number">&#x221E;</div><div class="stat-label">Applicable Decisions</div></div>
+            </div>
+        </section>
+
+        <section class="section" id="core-models">
+            <h2 class="section-title">Core Investing Mental Models</h2>
+            <div class="divider"></div>
+            <p class="section-sub">These mental models form the intellectual toolkit of the world's greatest investors. Each one transforms how you evaluate opportunities.</p>
+
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon icon-purple">&#x1F6E1;</div>
+                    <span class="tag tag-value">Value Investing</span>
+                    <h3 style="margin-top:10px">Margin of Safety</h3>
+                    <p>The most important concept in investing. Buy assets at a significant discount to their intrinsic value. The margin between price and value protects you from errors in analysis, bad luck, and market downturns.</p>
+                    <div class="quote-box">
+                        "The function of the margin of safety is, in essence, that of rendering unnecessary an accurate estimate of the future."
+                        <span class="author">- Benjamin Graham</span>
+                    </div>
+                    <div class="example-box">
+                        <strong>Application:</strong>
+                        If you calculate a company is worth $100/share, only buy at $65-70 (30-35% margin). This cushion absorbs estimation errors. The larger your uncertainty, the larger the margin you need.
+                    </div>
+                    <p>Learn how expert investors apply margin of safety at <a href="https://keeprule.com/en/masters" style="color:var(--primary)">KeepRule Masters</a>.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon icon-blue">&#x1F3AF;</div>
+                    <span class="tag tag-value">Value Investing</span>
+                    <h3 style="margin-top:10px">Circle of Competence</h3>
+                    <p>Know what you know, and more importantly, know what you don't know. Invest only in areas where you have genuine understanding. The size of your circle matters less than knowing its boundaries.</p>
+                    <div class="quote-box">
+                        "What an investor needs is the ability to correctly evaluate selected businesses. Note that word 'selected': You don't have to be an expert on every company. You only have to be able to evaluate companies within your circle of competence."
+                        <span class="author">- Warren Buffett</span>
+                    </div>
+                    <ul class="principle-list">
+                        <li>Identify industries you genuinely understand</li>
+                        <li>Be honest about the edges of your knowledge</li>
+                        <li>Slowly expand your circle through deep study</li>
+                        <li>Say "I don't know" more often - it's a strength</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon icon-amber">&#x1F3AD;</div>
+                    <span class="tag tag-behavior">Behavioral</span>
+                    <h3 style="margin-top:10px">Mr. Market</h3>
+                    <p>Benjamin Graham's brilliant allegory: imagine the stock market as a manic-depressive business partner who offers to buy or sell shares every day. Some days he's euphoric (prices too high), other days despondent (prices too low).</p>
+                    <div class="quote-box">
+                        "Mr. Market is there to serve you, not to guide you. It is his pocketbook, not his wisdom, that you will find useful."
+                        <span class="author">- Benjamin Graham</span>
+                    </div>
+                    <div class="example-box">
+                        <strong>Key Insight:</strong>
+                        You don't have to trade with Mr. Market every day. Wait for his irrational moments: buy when he's depressed and selling cheap, sell (or avoid) when he's euphoric and overpricing everything. Patience is the edge. See more at <a href="https://keeprule.com/en/scenarios" style="color:var(--secondary)">KeepRule Scenarios</a>.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon icon-green">&#x1F331;</div>
+                    <span class="tag tag-growth">Growth</span>
+                    <h3 style="margin-top:10px">Compounding</h3>
+                    <p>Einstein allegedly called compound interest the eighth wonder of the world. The key insight: small consistent returns over long periods produce extraordinary results. Time is the investor's greatest ally.</p>
+                    <table style="margin:16px 0">
+                        <tr><th>$10,000 invested at 10% annually</th><th>Value</th></tr>
+                        <tr><td>After 10 years</td><td>$25,937</td></tr>
+                        <tr><td>After 20 years</td><td>$67,275</td></tr>
+                        <tr><td>After 30 years</td><td>$174,494</td></tr>
+                        <tr><td>After 40 years</td><td>$452,593</td></tr>
+                    </table>
+                    <p>The last decade produces more absolute returns than the first three combined. This is why starting early matters enormously.</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon icon-red">&#x26A0;</div>
+                    <span class="tag tag-risk">Risk Management</span>
+                    <h3 style="margin-top:10px">Inversion</h3>
+                    <p>Instead of asking "How do I succeed?", ask "How would I guarantee failure?" Then avoid those things. Charlie Munger's favorite mental model: "All I want to know is where I'm going to die, so I'll never go there."</p>
+                    <div class="quote-box">
+                        "It is remarkable how much long-term advantage people like us have gotten by trying to be consistently not stupid, instead of trying to be very intelligent."
+                        <span class="author">- Charlie Munger</span>
+                    </div>
+                    <div class="example-box">
+                        <strong>Inversion in Investing:</strong>
+                        How to guarantee portfolio destruction: Use excessive leverage, concentrate in one sector, trade on emotion, ignore valuations, follow the crowd. Therefore: use moderate leverage (or none), diversify, be systematic, respect value, think independently. Read more from the <a href="https://keeprule.com/en/masters" style="color:var(--secondary)">masters at KeepRule</a>.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon icon-teal">&#x1F50D;</div>
+                    <span class="tag tag-value">Value Investing</span>
+                    <h3 style="margin-top:10px">Economic Moat</h3>
+                    <p>Coined by Warren Buffett, an economic moat is a durable competitive advantage that protects a company's profits from competition. Wide moats allow companies to earn above-average returns for decades.</p>
+                    <ul class="principle-list">
+                        <li><strong>Network Effects:</strong> The product becomes more valuable as more people use it (Visa, Facebook)</li>
+                        <li><strong>Switching Costs:</strong> Customers face high costs to switch (Enterprise software, banking)</li>
+                        <li><strong>Cost Advantages:</strong> Structural cost advantages competitors can't replicate (Costco, GEICO)</li>
+                        <li><strong>Intangible Assets:</strong> Brands, patents, regulatory licenses (Disney, pharmaceutical patents)</li>
+                        <li><strong>Efficient Scale:</strong> Market only supports one or few profitable players (Railroads, utilities)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="advanced">
+            <h2 class="section-title">Advanced Mental Models</h2>
+            <div class="divider"></div>
+
+            <div class="grid-2">
+                <div class="card">
+                    <span class="tag tag-risk">Risk Management</span>
+                    <h3 style="margin-top:10px">Asymmetric Risk/Reward</h3>
+                    <p>The best investments have limited downside but enormous upside. Instead of asking "what's the expected return?", ask "what's the worst case, and can I survive it?"</p>
+                    <div class="example-box">
+                        <strong>Example: Venture-Style Thinking</strong>
+                        Invest $10K in 10 startups. 7 fail completely (-$7K). 2 return 3x ($6K). 1 returns 20x ($20K). Total: $19K return on $10K investment despite 70% failure rate. The key is sizing positions to survive the losses.
+                    </div>
+                    <p>Apply asymmetric thinking to real decisions at <a href="https://keeprule.com/en/scenarios" style="color:var(--primary)">KeepRule Scenarios</a>.</p>
+                </div>
+
+                <div class="card">
+                    <span class="tag tag-behavior">Behavioral</span>
+                    <h3 style="margin-top:10px">Second-Order Thinking</h3>
+                    <p>First-order thinking: "This event is positive for the company." Second-order thinking: "This event is positive, but everyone already expects it, so it's priced in. What happens next that no one is considering?"</p>
+                    <div class="warning-box">
+                        <strong>The Trap of Consensus:</strong> If everyone agrees a stock is great, that optimism is already reflected in the price. Profits come from correctly anticipating what others haven't yet considered. Explore <a href="https://keeprule.com/en/principles" style="color:#d97706">contrarian principles at KeepRule</a>.
+                    </div>
+                </div>
+
+                <div class="card">
+                    <span class="tag tag-value">Value Investing</span>
+                    <h3 style="margin-top:10px">Owner's Mentality</h3>
+                    <p>Don't think of stocks as ticker symbols. Think of them as partial ownership of real businesses. Would you buy this entire company at the current market cap? If not, why buy a small piece?</p>
+                    <div class="quote-box">
+                        "If you aren't willing to own a stock for ten years, don't even think about owning it for ten minutes."
+                        <span class="author">- Warren Buffett</span>
+                    </div>
+                    <p>This mental model eliminates short-term noise and focuses on business fundamentals.</p>
+                </div>
+
+                <div class="card">
+                    <span class="tag tag-risk">Risk Management</span>
+                    <h3 style="margin-top:10px">Antifragility</h3>
+                    <p>From Nassim Taleb: build portfolios that don't just survive volatility but actually benefit from it. Position sizing, optionality, and convex payoffs are the keys.</p>
+                    <ul class="principle-list">
+                        <li>Keep cash reserves to buy during crashes (benefit from disorder)</li>
+                        <li>Use small positions in high-upside opportunities (convex payoffs)</li>
+                        <li>Avoid fragile positions: excessive leverage, concentration, illiquidity</li>
+                        <li>Let time work for you, not against you (avoid time decay)</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <span class="tag tag-behavior">Behavioral</span>
+                    <h3 style="margin-top:10px">Incentive Analysis</h3>
+                    <p>"Show me the incentive and I'll show you the outcome." - Charlie Munger. Before investing, ask: How is management compensated? How do analysts make money? Whose interests are aligned with yours?</p>
+                    <div class="example-box">
+                        <strong>Red Flags:</strong>
+                        - Management compensated by revenue, not profit (empire building)<br>
+                        - Stock buybacks funded by debt (financial engineering)<br>
+                        - Aggressive accounting that flatters earnings<br>
+                        - Related-party transactions that benefit insiders
+                    </div>
+                    <p>Study how <a href="https://keeprule.com/en/masters" style="color:var(--primary)">master investors at KeepRule</a> analyze incentive structures.</p>
+                </div>
+
+                <div class="card">
+                    <span class="tag tag-growth">Growth</span>
+                    <h3 style="margin-top:10px">Opportunity Cost</h3>
+                    <p>Every investment decision is simultaneously a decision NOT to invest that capital elsewhere. The true cost of any investment is the best alternative you gave up.</p>
+                    <div class="quote-box">
+                        "The wise ones bet heavily when the world offers them that opportunity. They bet big when they have the odds. And the rest of the time, they don't."
+                        <span class="author">- Charlie Munger</span>
+                    </div>
+                    <p>This means: hold cash when opportunities are poor, concentrate when they're exceptional. Explore opportunity cost thinking at <a href="https://keeprule.com/en/blog" style="color:var(--primary)">KeepRule Blog</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">The Mental Models Framework</h2>
+            <div class="divider"></div>
+
+            <table>
+                <tr><th>Mental Model</th><th>Category</th><th>Key Question</th><th>Origin</th></tr>
+                <tr><td><strong>Margin of Safety</strong></td><td><span class="tag tag-value">Value</span></td><td>Am I paying significantly less than it's worth?</td><td>Benjamin Graham</td></tr>
+                <tr><td><strong>Circle of Competence</strong></td><td><span class="tag tag-value">Value</span></td><td>Do I truly understand this business?</td><td>Warren Buffett</td></tr>
+                <tr><td><strong>Mr. Market</strong></td><td><span class="tag tag-behavior">Behavioral</span></td><td>Is the market offering me a deal or a trap?</td><td>Benjamin Graham</td></tr>
+                <tr><td><strong>Compounding</strong></td><td><span class="tag tag-growth">Growth</span></td><td>Will this compound value over decades?</td><td>Mathematics</td></tr>
+                <tr><td><strong>Inversion</strong></td><td><span class="tag tag-risk">Risk</span></td><td>What would guarantee failure? Am I avoiding it?</td><td>Charlie Munger</td></tr>
+                <tr><td><strong>Economic Moat</strong></td><td><span class="tag tag-value">Value</span></td><td>What protects this business from competition?</td><td>Warren Buffett</td></tr>
+                <tr><td><strong>Asymmetric Risk</strong></td><td><span class="tag tag-risk">Risk</span></td><td>Is the upside much larger than the downside?</td><td>Nassim Taleb</td></tr>
+                <tr><td><strong>Second-Order Thinking</strong></td><td><span class="tag tag-behavior">Behavioral</span></td><td>What happens after the obvious consequence?</td><td>Howard Marks</td></tr>
+                <tr><td><strong>Owner's Mentality</strong></td><td><span class="tag tag-value">Value</span></td><td>Would I buy this entire business?</td><td>Warren Buffett</td></tr>
+                <tr><td><strong>Antifragility</strong></td><td><span class="tag tag-risk">Risk</span></td><td>Does my portfolio benefit from volatility?</td><td>Nassim Taleb</td></tr>
+                <tr><td><strong>Incentive Analysis</strong></td><td><span class="tag tag-behavior">Behavioral</span></td><td>Whose interests are aligned with mine?</td><td>Charlie Munger</td></tr>
+                <tr><td><strong>Opportunity Cost</strong></td><td><span class="tag tag-growth">Growth</span></td><td>Is this the best use of my capital?</td><td>Economics</td></tr>
+            </table>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title">Deepen Your Investing Knowledge</h2>
+            <div class="divider"></div>
+            <div class="resource-grid">
+                <div class="resource-card"><a href="https://keeprule.com/en/masters">Expert Masters</a><p>Learn directly from Buffett, Munger, Graham & more</p></div>
+                <div class="resource-card"><a href="https://keeprule.com/en/scenarios">Decision Scenarios</a><p>Apply mental models to real investing decisions</p></div>
+                <div class="resource-card"><a href="https://keeprule.com/en/principles">Investment Principles</a><p>Structured principles for disciplined investing</p></div>
+                <div class="resource-card"><a href="https://keeprule.com/en/blog">Blog & Insights</a><p>Deep analysis of markets and mental models</p></div>
+                <div class="resource-card"><a href="https://keeprule.com/en/faq">FAQ</a><p>Common questions about investing frameworks</p></div>
+            </div>
+        </section>
+    </div>
+
+    <div class="cta-section">
+        <h2>Invest Smarter with Mental Models</h2>
+        <p>KeepRule brings together the wisdom of legendary investors into actionable decision frameworks. Think in models, invest with conviction.</p>
+        <a href="https://keeprule.com" class="btn btn-white" style="margin-right:12px">Visit KeepRule</a>
+        <a href="https://keeprule.com/en/masters" class="btn btn-white" style="background:transparent;border:2px solid white;color:white">Meet the Masters</a>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Investing Mental Models</h4>
+                <p style="font-size:0.9em;line-height:1.6">Essential frameworks for smarter investing. Part of the <a href="https://keeprule.com" style="color:#c4b5fd">KeepRule</a> wisdom library.</p>
+            </div>
+            <div class="footer-col">
+                <h4>KeepRule</h4>
+                <a href="https://keeprule.com">Home</a>
+                <a href="https://keeprule.com/en/scenarios">Scenarios</a>
+                <a href="https://keeprule.com/en/principles">Principles</a>
+                <a href="https://keeprule.com/en/masters">Masters</a>
+            </div>
+            <div class="footer-col">
+                <h4>Learn More</h4>
+                <a href="https://keeprule.com/en/blog">Blog</a>
+                <a href="https://keeprule.com/en/faq">FAQ</a>
+                <a href="https://keeprule.com">Get Started</a>
+            </div>
+            <div class="footer-col">
+                <h4>Key Models</h4>
+                <a href="#core-models">Margin of Safety</a>
+                <a href="#core-models">Circle of Competence</a>
+                <a href="#advanced">Inversion</a>
+                <a href="#advanced">Antifragility</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Investing Mental Models. Wisdom curated by <a href="https://keeprule.com" style="color:#c4b5fd">KeepRule</a>.</p>
+        </div>
+    </footer>
+
+    <section class="section" style="padding-top:0">
+        <div class="container">
+            <h2 class="section-title">Applying Mental Models: A Practical Workflow</h2>
+            <div class="divider"></div>
+            <p class="section-sub">Use this step-by-step process to apply mental models to any investment decision.</p>
+            <div class="grid-2">
+                <div class="card" style="background:linear-gradient(135deg,#faf5ff,#ede9fe)">
+                    <h3>The Investment Analysis Checklist</h3>
+                    <ul class="principle-list">
+                        <li><strong>Circle of Competence Check:</strong> Do I genuinely understand this business, its customers, and its competitive dynamics?</li>
+                        <li><strong>Moat Analysis:</strong> What protects this business from competition? Is the moat widening or narrowing?</li>
+                        <li><strong>Inversion:</strong> How could this investment go to zero? What would cause permanent capital loss?</li>
+                        <li><strong>Margin of Safety:</strong> Am I paying at least 25-30% below my estimate of intrinsic value?</li>
+                        <li><strong>Incentive Check:</strong> Is management aligned with shareholders? How are they compensated?</li>
+                        <li><strong>Second-Order Effects:</strong> What does the market already expect? What am I seeing that others are missing?</li>
+                        <li><strong>Opportunity Cost:</strong> Is this the best use of my capital right now compared to all alternatives?</li>
+                        <li><strong>Position Sizing:</strong> Even if I am right, how much should I risk? What does Kelly Criterion suggest?</li>
+                    </ul>
+                    <p style="margin-top:16px">Download the full checklist and explore interactive tools at <a href="https://keeprule.com" style="color:var(--primary)">KeepRule</a>.</p>
+                </div>
+                <div>
+                    <div class="card">
+                        <h3>Common Mental Model Mistakes</h3>
+                        <p>Even experienced investors misapply mental models. Watch out for these traps:</p>
+                        <div class="warning-box">
+                            <strong>Confirmation Bias in Moat Analysis:</strong> Seeing moats where none exist because you already like the company. Always look for evidence AGAINST your thesis first.
+                        </div>
+                        <div class="warning-box">
+                            <strong>False Margin of Safety:</strong> Using optimistic intrinsic value estimates to justify a purchase. Your margin of safety is only as good as your valuation is conservative.
+                        </div>
+                        <div class="warning-box">
+                            <strong>Ignoring Opportunity Cost:</strong> Holding mediocre positions because they are not losing money, when better opportunities exist elsewhere. Capital has a time value.
+                        </div>
+                        <p style="margin-top:16px">Avoid these mistakes with structured decision processes from <a href="https://keeprule.com/en/principles" style="color:var(--primary)">KeepRule Principles</a>.</p>
+                    </div>
+                    <div class="card" style="margin-top:20px">
+                        <h3>Further Reading</h3>
+                        <p>Deepen your understanding of investing mental models:</p>
+                        <ul style="padding-left:20px;color:var(--text-light);margin:12px 0">
+                            <li style="padding:4px 0">Visit <a href="https://keeprule.com/en/masters" style="color:var(--primary)">KeepRule Masters</a> for profiles of legendary investors</li>
+                            <li style="padding:4px 0">Explore <a href="https://keeprule.com/en/scenarios" style="color:var(--primary)">real investing scenarios</a> to practice these models</li>
+                            <li style="padding:4px 0">Read the <a href="https://keeprule.com/en/blog" style="color:var(--primary)">KeepRule Blog</a> for deep dives into each mental model</li>
+                            <li style="padding:4px 0">Check the <a href="https://keeprule.com/en/faq" style="color:var(--primary)">FAQ</a> for common questions about mental model investing</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="padding:30px 0">
+        <div class="container">
+            <div class="grid-3">
+                <div class="master-card">
+                    <h3>Warren Buffett</h3>
+                    <p>"Rule No. 1: Never lose money. Rule No. 2: Never forget Rule No. 1." Buffett's approach combines margin of safety, circle of competence, and extraordinary patience. He waits for the fat pitch and swings hard.</p>
+                    <a href="https://keeprule.com/en/masters" style="color:#c4b5fd;display:block;margin-top:12px">Read more on KeepRule Masters &rarr;</a>
+                </div>
+                <div class="master-card">
+                    <h3>Charlie Munger</h3>
+                    <p>"Invert, always invert." Munger's lattice of mental models draws from psychology, mathematics, physics, and biology. He believes that worldly wisdom comes from combining insights across disciplines to see what others miss.</p>
+                    <a href="https://keeprule.com/en/masters" style="color:#c4b5fd;display:block;margin-top:12px">Explore on KeepRule Masters &rarr;</a>
+                </div>
+                <div class="master-card">
+                    <h3>Benjamin Graham</h3>
+                    <p>The father of value investing and creator of the margin of safety concept. Graham taught that investing is most intelligent when it is most businesslike. His frameworks have created more wealth than perhaps any other single body of investment thought.</p>
+                    <a href="https://keeprule.com/en/masters" style="color:#c4b5fd;display:block;margin-top:12px">Discover on KeepRule Masters &rarr;</a>
+                </div>
+            </div>
+            <div style="text-align:center;margin-top:30px">
+                <p style="color:var(--text-light);max-width:700px;margin:0 auto 20px">
+                    These mental models are not just for professional investors. They apply to any decision involving uncertainty,
+                    risk, and long-term thinking. Whether you are choosing a career, starting a business, or allocating your savings,
+                    thinking in models gives you a structured edge over instinct alone.
+                </p>
+                <a href="https://keeprule.com" class="btn btn-primary">Start Your Journey at KeepRule</a>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
